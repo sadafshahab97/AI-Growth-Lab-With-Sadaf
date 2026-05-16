@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import GoogleAnalytics from "./components/GoogleAnalytics"; // Import the component
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import Footer from "./components/Footer";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -13,35 +13,37 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Sadaf Automation | AI-Powered Pinterest Growth Engine",
-    template: "%s | Sadaf Automation",
+    default: "AI Growth Lab | AI-Powered Pinterest Automation & Web Solutions",
+    template: "%s | AI Growth Lab",
   },
   description:
-    "Scale your e-commerce sales with human-mimicking AI agents. Our V-2 Engine automates Pinterest workflows with SEO-optimized content and 99% safety.",
+    "Scale your e-commerce brand globally. Our advanced V-4 Multi-Source Engine automates Pinterest workflows with AI SEO metadata, motion analysis video scheduling, and custom full-stack web architectures.",
   keywords: [
-    "Pinterest Automation",
-    "AI Marketing Agency",
-    "E-commerce Growth AI",
-    "Sadaf Developer",
-    "Automated Social Media Marketing",
+    "AI Growth Lab",
+    "Pinterest Automation Software",
+    "V-4 Multi-Source Engine",
     "Pinterest SEO US Market",
+    "Full-Stack Web Solutions",
+    "AI Marketing Automation",
+    "E-commerce Growth Hack",
+    "Automated Pin Scheduler",
   ],
-  metadataBase: new URL("https://sadaf-pin-ai-automation.vercel.app"),
+  metadataBase: new URL("https://ai-growth-lab-with-sadaf.vercel.app"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Sadaf Automation | Next-Gen Pinterest Growth",
+    title: "AI Growth Lab | Next-Gen Brand Automation Pipelines",
     description:
-      "Our V-2 Engine grew beta accounts by +999% in 6 weeks. High-conversion AI automation for jewelry and e-commerce brands.",
-    url: "https://sadaf-pin-ai-automation.vercel.app",
-    siteName: "Sadaf Automation",
+      "Deploy our V-4 Elite Engine featuring advanced video motion analysis, native metadata generation, and automated SEO ranking optimization. Engineered for high-ticket scaling.",
+    url: "https://ai-growth-lab-with-sadaf.vercel.app",
+    siteName: "AI Growth Lab",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Sadaf Automation V-2 Engine Dashboard",
+        alt: "AI Growth Lab V-4 Automation Control Panel",
       },
     ],
     locale: "en_US",
@@ -49,10 +51,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sadaf Automation | Pinterest V-2 Engine",
+    title: "AI Growth Lab | V-4 Multi-Source Automation Engine",
     description:
-      "Agentic Pinterest workflows that speak your brand's language.",
-    images: ["/og-image.jpg"],
+      "High-performance full-stack systems and secure agentic Pinterest workflows that scale visibility natively.",
+    images: ["/og-image.png"], // Synchronized extensions to match OG payload safely
   },
   robots: {
     index: true,
@@ -67,6 +69,34 @@ export const metadata: Metadata = {
   },
 };
 
+// Strongly typed structured data for SEO schemas
+interface ProviderAddress {
+  "@type": "PostalAddress";
+  addressLocality: string;
+  addressCountry: string;
+}
+
+interface ProviderProfile {
+  "@type": "LocalBusiness";
+  name: string;
+  address: ProviderAddress;
+}
+
+interface ServiceOffer {
+  "@type": "Offer";
+  priceCurrency: string;
+}
+
+interface ServiceSchema {
+  "@context": "https://schema.org";
+  "@type": "Service";
+  name: string;
+  description: string;
+  provider: ProviderProfile;
+  areaServed: string[];
+  offers: ServiceOffer;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -74,26 +104,26 @@ export default function RootLayout({
 }>) {
   const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
-  const jsonLd = {
+  // Strict structural typing for JSON-LD object to avoid any injection/type errors
+  const jsonLd: ServiceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: "Sadaf Automation - Pinterest AI Growth Engine",
+    name: "AI Growth Lab - Core Automation & Web Ecosystems",
     description:
-      "Professional Pinterest automation using AI/ML agentic workflows for e-commerce brands.",
+      "Elite enterprise systems offering end-to-end full-stack modern web solutions and automated Pinterest growth loops fueled by the V-4 multi-source execution engine.",
     provider: {
       "@type": "LocalBusiness",
-      name: "Sadaf-Automation",
+      name: "AI Growth Lab",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Karachi",
         addressCountry: "PK",
       },
     },
-    areaServed: "US",
+    areaServed: ["US", "PK", "Global"],
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",
-      price: "200.00",
     },
   };
 
@@ -102,8 +132,8 @@ export default function RootLayout({
       lang="en"
       className={`${plusJakartaSans.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {/* Google Analytics - Sirf tab load hoga agar ID available ho */}
+      <body className="min-h-full flex flex-col bg-[#1a1a1a]">
+        {/* Google Analytics Setup */}
         {GA_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_ID} />}
 
         <script
