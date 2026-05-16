@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
+import GoogleAnalytics from "./components/GoogleAnalytics"; // Import the component
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "700"],
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
     "Automated Social Media Marketing",
     "Pinterest SEO US Market",
   ],
-  metadataBase: new URL("https://sadaf-pin-ai-automation.vercel.app"), 
+  metadataBase: new URL("https://sadaf-pin-ai-automation.vercel.app"),
   alternates: {
     canonical: "/",
   },
@@ -69,6 +71,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -84,24 +88,29 @@ export default function RootLayout({
         addressCountry: "PK",
       },
     },
-    areaServed: "US", // Kyunke aapka target US audience hai
+    areaServed: "US",
     offers: {
       "@type": "Offer",
       priceCurrency: "USD",
       price: "200.00",
     },
   };
+
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.className}  h-full antialiased`}
+      className={`${plusJakartaSans.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Google Analytics - Sirf tab load hoga agar ID available ho */}
+        {GA_ID && <GoogleAnalytics GA_MEASUREMENT_ID={GA_ID} />}
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <Navbar />
+        <main className="grow">{children}</main>
       </body>
     </html>
   );
