@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "AI Growth Lab",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "AI Growth Lab V-4 Automation Control Panel",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "AI Growth Lab | V-4 Multi-Source Automation Engine",
     description:
       "High-performance full-stack systems and secure agentic Pinterest workflows that scale visibility natively.",
-    images: ["/og-image.png"], // Synchronized extensions to match OG payload safely
+    images: ["/og-image.jpg"], // Synchronized extensions to match OG payload safely
   },
   robots: {
     index: true,
