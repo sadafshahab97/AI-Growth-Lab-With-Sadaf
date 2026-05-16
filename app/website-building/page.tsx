@@ -7,14 +7,9 @@ import {
   CheckCircle,
   Layout,
   ArrowRight,
-  Mail,
-  Phone,
   Zap,
   Sparkles,
 } from "lucide-react";
-import { FaFacebook } from "react-icons/fa";
-import Link from "next/link";
-import Image from "next/image";
 import PricingSection, {
   FadeIn,
 } from "../components/website-building-comp/PricingPackages";
@@ -376,145 +371,6 @@ export default function App() {
 
       {/* Contact Section */}
       <ContactSection />
-
-      {/* Footer */}
-      <footer className="bg-[#121212] text-white pt-20 pb-10 px-6 lg:px-10 shrink-0 border-t-8 border-action">
-        <div className="w-full max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
-            <div className="col-span-1 md:col-span-2 lg:col-span-1">
-              <div className="flex items-center gap-3 mb-6 group cursor-pointer">
-                {/* Logo Container */}
-                <div className="relative w-20 h-20 bg-action overflow-hidden flex items-center justify-center shadow-lg shadow-red-500/20 transition-transform group-hover:scale-105 rounded-full">
-                  <Image
-                    src="/ai_growth_lab_logo.png"
-                    alt="AI Growth Lab Logo"
-                    width={100}
-                    height={100}
-                    className="object-contain" // 'p-1' taake logo edges se bilkul na chipke
-                    priority // Logo ke liye priority true rakhna SEO aur LCP ke liye acha hai
-                  />
-                </div>
-
-                {/* Text */}
-                <span className="font-bold text-2xl tracking-tight text-white">
-                  AI Growth Lab
-                </span>
-              </div>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                We empower small businesses with enterprise-grade web
-                applications, AI integrations, and unparalleled support.
-              </p>
-              <div className="flex items-center gap-4 mt-6">
-                <Link
-                  href="https://www.facebook.com/automatewithsadaf/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-[#222] rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-action transition-colors"
-                >
-                  <FaFacebook className="w-5 h-5" />
-                </Link>
-                <Link
-                  href="mailto:theaigrowthlabwithsadaf@gmail.com"
-                  className="w-10 h-10 bg-[#222] rounded-full flex items-center justify-center text-slate-300 hover:text-white hover:bg-action transition-colors"
-                >
-                  <Mail className="w-5 h-5" />
-                </Link>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">
-                Quick Links
-              </h4>
-              <ul className="space-y-4 text-sm text-slate-400 font-medium">
-                <li>
-                  <Link
-                    href="#why-us"
-                    className="hover:text-action transition-colors flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-3 h-3" /> About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#process"
-                    className="hover:text-action transition-colors flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-3 h-3" /> Our Process
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#pricing"
-                    className="hover:text-action transition-colors flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-3 h-3" /> Packages & Pricing
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#contact"
-                    className="hover:text-action transition-colors flex items-center gap-2"
-                  >
-                    <ArrowRight className="w-3 h-3" /> Contact Us
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">
-                Services
-              </h4>
-              <ul className="space-y-4 text-sm text-slate-400 font-medium">
-                <li className="flex items-center gap-2">
-                  <ArrowRight className="w-3 h-3" /> Custom Web Design
-                </li>
-                <li className="flex items-center gap-2">
-                  <ArrowRight className="w-3 h-3" /> AI Automation
-                </li>
-                <li className="flex items-center gap-2">
-                  <ArrowRight className="w-3 h-3" /> E-commerce Solutions
-                </li>
-                <li className="flex items-center gap-2">
-                  <ArrowRight className="w-3 h-3" /> SEO Optimization
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">
-                Contact
-              </h4>
-              <ul className="space-y-4 text-sm text-slate-400">
-                <li className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-action shrink-0 mt-0.5" />
-                  <span>theaigrowthlabwithsadaf@gmail.com</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-action shrink-0 mt-0.5" />
-                  <span>+92 347 3562371</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-slate-500 text-xs uppercase font-bold tracking-widest">
-              &copy; {new Date().getFullYear()} AI Growth Lab. All rights
-              reserved.
-            </div>
-            <div className="flex gap-6 text-[10px] font-bold text-slate-500 uppercase tracking-widest">
-              <Link href="#" className="hover:text-action transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="#" className="hover:text-action transition-colors">
-                Terms of Service
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

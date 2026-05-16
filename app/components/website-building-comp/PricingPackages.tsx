@@ -1,6 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Zap, Star, Sparkles, Building, Check } from "lucide-react";
+"use client";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Zap, Star, Sparkles, Building, Check, X, Loader2 } from "lucide-react";
 
 export const FadeIn = ({
   children,
@@ -23,35 +24,65 @@ export const FadeIn = ({
 );
 
 const PricingSection = () => {
-  // Fixed details
   const WHATSAPP_NUMBER = "923473562371";
-  const NOTIFICATION_EMAIL = "theaigrowthlabwithsadaf@gmail.com";
 
-  // Fixed the parameter types here
-  const handlePlanSelection = async (planName: string, price: string) => {
-    const message = `Hi! I am interested in the *${planName}* package (${price}). Please provide more details.`;
+  // Modal State Control
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState({ name: "", price: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // 1. Send Silent Email Notification using FormSubmit
+  // Form Fields State
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  // Open modal and store selected pricing variables
+  const openModal = (planName: string, price: string) => {
+    setSelectedPlan({ name: planName, price });
+    setIsModalOpen(true);
+  };
+
+  // Close modal and reset state
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setFormData({ name: "", email: "", phone: "", message: "" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // 1. Send Complete Lead Details to Internal Route Handler via SMTP
     try {
-      await fetch(`https://formsubmit.co/ajax/${NOTIFICATION_EMAIL}`, {
+      await fetch("/api/pricing", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          Subject: "New Lead from Pricing Page",
-          Selected_Plan: planName,
-          Price: price,
-          Status: "Redirected to WhatsApp",
+          planName: selectedPlan.name,
+          price: selectedPlan.price,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          userMessage: formData.message,
         }),
       });
     } catch (error) {
-      console.log(
-        "Email notification failed, but redirecting to WhatsApp...",
+      console.error(
+        "Nodemailer failed in background, launching fallback redirect...",
         error,
       );
     }
 
-    // 2. Redirect to WhatsApp
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    setIsSubmitting(false);
+    closeModal();
+
+    // 2. Redirect User directly to WhatsApp with customized context message
+    const whatsappText = `Hi! My name is *${formData.name}*.\nI am interested in the *${selectedPlan.name}* package (${selectedPlan.price}).\n\n*My Email:* ${formData.email}\n*My Phone:* ${formData.phone}\n*Message:* ${formData.message || "None"}`;
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappText)}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -64,7 +95,6 @@ const PricingSection = () => {
         <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-red-100/30 blur-3xl"></div>
         <div className="absolute bottom-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-action/10 blur-3xl"></div>
       </div>
-
       <div className="w-full max-w-7xl mx-auto relative z-10">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -84,7 +114,7 @@ const PricingSection = () => {
         </FadeIn>
 
         <div className="grid lg:grid-cols-3 gap-8 lg:gap-10 lg:items-center relative">
-          {/* Essential */}
+          {/* Essential Plan */}
           <FadeIn delay={0.1} className="h-full">
             <motion.div
               whileHover={{ y: -8 }}
@@ -120,9 +150,7 @@ const PricingSection = () => {
                 </div>
               </div>
               <button
-                onClick={() =>
-                  handlePlanSelection("Essential Startups", "PKR 50k")
-                }
+                onClick={() => openModal("Essential Startups", "PKR 50k")}
                 className="block w-full px-4 py-4 bg-[#121212] border border-white/10 hover:border-action hover:text-action hover:bg-red-500/10 transition-all text-slate-300 text-xs font-bold text-center rounded-xl tracking-wide uppercase"
               >
                 Select Essential
@@ -130,7 +158,7 @@ const PricingSection = () => {
             </motion.div>
           </FadeIn>
 
-          {/* Professional */}
+          {/* Professional Plan */}
           <FadeIn delay={0.2} className="h-full">
             <motion.div
               whileHover={{ y: -12 }}
@@ -169,9 +197,7 @@ const PricingSection = () => {
                 </div>
               </div>
               <button
-                onClick={() =>
-                  handlePlanSelection("Professional Growth", "PKR 120k")
-                }
+                onClick={() => openModal("Professional Growth", "PKR 120k")}
                 className="block w-full px-4 py-4 bg-action hover:bg-action-hover text-white text-xs font-bold text-center rounded-xl shadow-lg shadow-red-500/20 transition-all tracking-wide uppercase"
               >
                 Select Professional
@@ -179,7 +205,7 @@ const PricingSection = () => {
             </motion.div>
           </FadeIn>
 
-          {/* Enterprise */}
+          {/* Enterprise Plan */}
           <FadeIn delay={0.3} className="h-full">
             <motion.div
               whileHover={{ y: -8 }}
@@ -212,7 +238,7 @@ const PricingSection = () => {
               </div>
               <button
                 onClick={() =>
-                  handlePlanSelection("Enterprise E-commerce", "Custom Quote")
+                  openModal("Enterprise E-commerce", "Custom Quote")
                 }
                 className="block w-full px-4 py-4 bg-[#1a1a1a]/10 hover:bg-[#1a1a1a]/20 border border-white/5 transition-all text-white text-xs font-bold text-center rounded-xl tracking-wide uppercase backdrop-blur-sm relative z-10"
               >
@@ -222,6 +248,132 @@ const PricingSection = () => {
           </FadeIn>
         </div>
       </div>
+      {/* Interactive Popup Overlay Modal */}\
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-4 sm:px-6">
+            {/* Backdrop Glow Click Blur Layer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeModal}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+
+            {/* Main Center Form Box (Mobile Responsive Upgrades Included) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", duration: 0.4 }}
+              className="relative w-[95%] sm:w-full max-w-md bg-[#1a1a1a] border border-white/10 p-5 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl z-10 max-h-[90vh] overflow-y-auto custom-scrollbar"
+            >
+              {/* Decorative Accent Top Line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-action" />
+
+              {/* Top Close Button Row */}
+              <div className="flex justify-between items-start mb-5 sm:mb-6">
+                <div>
+                  <span className="text-[10px] font-bold text-action uppercase tracking-widest">
+                    Inquiry Details
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-bold text-white mt-1 wrap-break-words">
+                    {selectedPlan.name}
+                  </h3>
+                </div>
+                <button
+                  onClick={closeModal}
+                  className="p-1.5 rounded-xl bg-white/5 text-slate-400 hover:text-white transition-colors ml-2"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Form Handling Fields */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 sm:py-3 bg-[#121212] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-action transition-colors"
+                    placeholder="John Doe"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 sm:py-3 bg-[#121212] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-action transition-colors"
+                    placeholder="john@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                    Phone / WhatsApp *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 sm:py-3 bg-[#121212] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-action transition-colors"
+                    placeholder="+92 300 1234567"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                    Message / Custom Request
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={formData.message}
+                    onChange={(e) =>
+                      setFormData({ ...formData, message: e.target.value })
+                    }
+                    className="w-full px-4 py-2.5 sm:py-3 bg-[#121212] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-action transition-colors resize-none"
+                    placeholder="Tell me more about your requirements..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-2 py-3.5 sm:py-4 bg-action hover:bg-action-hover text-white text-sm font-bold rounded-xl transition-all tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-red-500/10 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Securing Lead Data...
+                    </>
+                  ) : (
+                    "Confirm & Continue to WhatsApp"
+                  )}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

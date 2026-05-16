@@ -1,15 +1,13 @@
 "use client";
-import dynamic from "next/dynamic"; 
+import dynamic from "next/dynamic";
 import HeroSection from "./HeroSection";
 import ServiceTiers from "./ServiceTiers";
 import ProcessSection from "./ProcessSection";
 import FinalConversion from "./FinalConversion";
-import Footer from "./Footer";
 import FAQ from "./FAQ";
 import Testimonials from "./Testimonials";
 import CustomSolution from "./CustomSolution";
 import FloatingButton from "./FloatingButton";
-
 
 const ProofSection = dynamic(() => import("./ProofSection"), {
   ssr: false,
@@ -51,7 +49,6 @@ export default function LandingPage() {
 
       {/* UI Elements - Always top layer */}
       <FloatingButton />
-      <Footer />
     </div>
   );
 }

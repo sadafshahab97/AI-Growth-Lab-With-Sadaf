@@ -5,8 +5,7 @@ import { Mail, Phone, CheckCircle2 } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 import Link from "next/link";
 
-// FadeIn Component (Reuse if already defined elsewhere)
-const FadeIn = ({
+export const FadeIn = ({
   children,
   delay = 0,
 }: {
@@ -37,17 +36,12 @@ const ContactSection = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${NOTIFICATION_EMAIL}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            ...data,
-            _subject: "New Website Proposal Request!",
-          }),
-        },
-      );
+      // Apne banaye huay Secure Next.js API endpoint ko call kiya
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
       if (response.ok) {
         setStatus("success");
@@ -56,7 +50,7 @@ const ContactSection = () => {
         setStatus("error");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setStatus("error");
     }
   };
@@ -66,7 +60,6 @@ const ContactSection = () => {
       id="contact"
       className="px-6 lg:px-10 py-24 lg:py-32 bg-[#1a1a1a] flex-1 shrink-0 relative overflow-hidden"
     >
-      {/* Decorative Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[48px_48px]"></div>
 
       <div className="w-full max-w-6xl mx-auto relative z-10">
@@ -87,7 +80,7 @@ const ContactSection = () => {
 
         <FadeIn delay={0.2}>
           <div className="bg-[#1a1a1a] rounded-3xl border border-white/10 overflow-hidden shadow-2xl flex flex-col lg:flex-row">
-            {/* Left Side: Contact Info */}
+            {/* Left Side Info */}
             <div className="lg:w-5/12 bg-linear-to-br from-[#121212] to-[#1a1a1a] p-10 md:p-14 text-white flex flex-col justify-between relative overflow-hidden">
               <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#1a1a1a]/5 rounded-tl-full blur-3xl pointer-events-none"></div>
               <div className="relative z-10">
@@ -110,7 +103,7 @@ const ContactSection = () => {
                         Email Us
                       </p>
                       <p className="font-medium text-base">
-                        theaigrowthlabwithsadaf@gmail.com
+                        {NOTIFICATION_EMAIL}
                       </p>
                     </div>
                   </Link>
@@ -152,7 +145,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Right Side: Form */}
+            {/* Right Side UI Form */}
             <div className="lg:w-7/12 p-10 md:p-14 bg-[#1a1a1a]">
               {status === "success" ? (
                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-12">
