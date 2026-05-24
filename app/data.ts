@@ -35,7 +35,7 @@ export const tiers: Tier[] = [
     badge: "Most Popular",
     description: "Ideal for scaling brands that want traffic + consistency.",
     features: [
-      "150 SEO Optimized Pins",
+      "120 SEO Optimized Pins",
       "50 Premium Video Pins (25 sec video)",
       "Pinterest Trend Research",
       "US/UK Audience Scheduling",
@@ -54,7 +54,7 @@ export const tiers: Tier[] = [
     badge: "For Serious Brands",
     description: "Advanced DFY Pinterest scaling system for aggressive growth.",
     features: [
-      "250 High-Volume SEO Pins",
+      "180 High-Volume SEO Pins",
       "75 Premium Video Pins (25 sec video)",
       "Advanced Trend Hijacking",
       "Viral Content Optimization",
