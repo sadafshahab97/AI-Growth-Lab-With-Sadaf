@@ -12,7 +12,7 @@ export interface Tier {
 export const tiers: Tier[] = [
   {
     title: "V-4 Starter: Presence",
-    price: "299",
+    price: "229",
     badge: "Best For Beginners",
     description:
       "Perfect for small brands & creators starting Pinterest growth.",
@@ -31,7 +31,7 @@ export const tiers: Tier[] = [
   },
   {
     title: "V-4 Growth: Intelligence",
-    price: "599",
+    price: "349",
     badge: "Most Popular",
     description: "Ideal for scaling brands that want traffic + consistency.",
     features: [
@@ -50,7 +50,7 @@ export const tiers: Tier[] = [
   },
   {
     title: "V-4 Elite: Dominance",
-    price: "999",
+    price: "699",
     badge: "For Serious Brands",
     description: "Advanced DFY Pinterest scaling system for aggressive growth.",
     features: [
