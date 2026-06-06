@@ -4,10 +4,8 @@ import nodemailer from "nodemailer";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    // Destructuring me phone field add kar di
     const { first_name, last_name, email, phone, website, message } = data;
 
-    // SMTP Configuration
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -18,7 +16,6 @@ export async function POST(request: Request) {
       },
     });
 
-    // Pinterest-style Red Premium HTML Template
     const emailHtml = `
       <!DOCTYPE html>
       <html>

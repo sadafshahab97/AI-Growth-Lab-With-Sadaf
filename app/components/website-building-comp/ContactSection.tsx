@@ -35,19 +35,17 @@ const ContactSection = () => {
     const formData = new FormData(e.currentTarget);
     const rawData = Object.fromEntries(formData.entries());
 
-    // 1. Name fields ko merge karke single string banana
     const fullName =
       `${rawData.first_name || ""} ${rawData.last_name || ""}`.trim();
 
-    // 2. API Format ke mutabiq Structured Payload tayyar karna (including phone)
     const payload = {
       name: fullName || "Anonymous Lead",
       email: rawData.email,
-      phone: rawData.phone || "Not Provided", // <-- Added standard phone parameter here
+      phone: rawData.phone || "Not Provided", 
       message: rawData.message,
-      source: "AI Growth Lab Website", // Aapka dynamic identifier backend ke liye
+      source: "AI Growth Lab Website",
       custom_fields: {
-        website: rawData.website || "Not Provided", // Jo standard fields me fit nahi hai
+        website: rawData.website || "Not Provided", 
       },
     };
 

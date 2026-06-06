@@ -1,26 +1,21 @@
-"use client"; // Agar aap Next.js App Router (app directory) use kar rahi hain
+"use client";
 
 import React, { useRef } from "react";
 
 export default function RichEditor() {
-  // TypeScript ko batane k liye ke ye ref ek HTML div element ko target karega
   const editorRef = useRef<HTMLDivElement>(null);
 
-  // Formatting function jahan command aur value ke types defined hain
   const formatText = (command: string, value: string = ""): void => {
     if (typeof window !== "undefined") {
       document.execCommand(command, false, value);
-      editorRef.current?.focus(); // Safely focus back to editor
+      editorRef.current?.focus();
     }
   };
 
   const handleSave = (): void => {
     if (editorRef.current) {
-      // Blog ka sara data HTML string ki surat mein milega
       const blogContent: string = editorRef.current.innerHTML;
       console.log("Saved Blog Content (HTML):", blogContent);
-
-      // Aap is blogContent string ko backend api ya database mein bhej sakti hain
     }
   };
 
@@ -113,7 +108,7 @@ export default function RichEditor() {
       <div
         ref={editorRef}
         contentEditable={true}
-        suppressContentEditableWarning={true} // React ka warning hide karne k liye kyunki innerHTML change hoga
+        suppressContentEditableWarning={true} 
         style={{
           minHeight: "250px",
           outline: "none",

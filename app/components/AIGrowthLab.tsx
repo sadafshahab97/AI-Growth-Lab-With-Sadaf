@@ -76,7 +76,7 @@ export default function AIGrowthLab() {
       {/* 1. HERO SECTION */}
       <section className="max-w-4xl mx-auto px-6 pt-32 pb-20 text-center relative">
         {/* Subtle Cyber Glow background effect */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-zinc-800/20 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-75 h-75 bg-zinc-800/20 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-800 bg-zinc-950 text-xs text-zinc-400 mb-6 tracking-wider uppercase">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -110,15 +110,14 @@ export default function AIGrowthLab() {
         </div>
       </section>
 
-      {/* 2. TECH STACK TAPE (Social Proof/Capabilities) */}
       <section className="border-y border-zinc-900 bg-zinc-950/50 py-6 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12 mask-edges">
-          {/* Static Label - Jo fixed rahega */}
+
           <span className="text-xs uppercase tracking-widest text-zinc-600 whitespace-nowrap z-10">
             {`// INTEGRATION ECOSYSTEM:`}
           </span>
 
-          {/* Clean Sliding Wrapper without Duplication */}
+
           <div className="w-full overflow-hidden">
             <div className="flex justify-center items-center gap-8 md:gap-16 animate-swing whitespace-nowrap w-max mx-auto">
               {technologies.map((tech, i) => (
@@ -137,7 +136,7 @@ export default function AIGrowthLab() {
         </div>
       </section>
 
-      {/* 3. CORE SERVICES SECTION */}
+  
       <section
         id="services"
         className="max-w-6xl mx-auto px-6 py-24 scroll-mt-20"
