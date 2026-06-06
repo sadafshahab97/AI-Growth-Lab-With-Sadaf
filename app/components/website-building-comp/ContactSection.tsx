@@ -33,14 +33,33 @@ const ContactSection = () => {
     setStatus("sending");
 
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+    const rawData = Object.fromEntries(formData.entries());
+
+    // 1. Name fields ko merge karke single string banana
+    const fullName =
+      `${rawData.first_name || ""} ${rawData.last_name || ""}`.trim();
+
+    // 2. API Format ke mutabiq Structured Payload tayyar karna (including phone)
+    const payload = {
+      name: fullName || "Anonymous Lead",
+      email: rawData.email,
+      phone: rawData.phone || "Not Provided", // <-- Added standard phone parameter here
+      message: rawData.message,
+      source: "AI Growth Lab Website", // Aapka dynamic identifier backend ke liye
+      custom_fields: {
+        website: rawData.website || "Not Provided", // Jo standard fields me fit nahi hai
+      },
+    };
 
     try {
-      // Apne banaye huay Secure Next.js API endpoint ko call kiya
-      const response = await fetch("/api/contact", {
+      // 3. Centralized automation backend engine par direct secure hit
+      const response = await fetch("http://127.0.0.1:8000/api/v1/leads", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "sk_live_TcQTA_P111eceUchwFZRKK3frNkHmIf6RWNfILZWYgU", // Secure Server-level API Key
+        },
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -50,7 +69,7 @@ const ContactSection = () => {
         setStatus("error");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Automation Sync Error:", error);
       setStatus("error");
     }
   };
@@ -204,6 +223,17 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <label className="block text-xs font-black text-slate-200 mb-2 uppercase tracking-widest">
+                      Phone Number (Optional)
+                    </label>
+                    <input
+                      name="phone"
+                      type="tel"
+                      className="w-full px-4 py-3 bg-[#121212] text-sm rounded-xl border border-white/10 focus:border-action outline-none transition-all text-white"
+                      placeholder="+92 300 1234567"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-black text-slate-200 mb-2 uppercase tracking-widest">
                       Website URL (Optional)
                     </label>
                     <input
@@ -227,6 +257,7 @@ const ContactSection = () => {
                   </div>
 
                   <motion.button
+                    key="submit-btn"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     disabled={status === "sending"}

@@ -4,7 +4,8 @@ import nodemailer from "nodemailer";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { first_name, last_name, email, website, message } = data;
+    // Destructuring me phone field add kar di
+    const { first_name, last_name, email, phone, website, message } = data;
 
     // SMTP Configuration
     const transporter = nodemailer.createTransport({
@@ -32,7 +33,7 @@ export async function POST(request: Request) {
           <tr>
             <td align="center">
               
-              <table role="presentation" width="100%" max-width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; background-color: #ffffff; border-radius: 32px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); border: 1px border #e1e1e1;">
+              <table role="presentation" width="100%" max-width="600" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; background-color: #ffffff; border-radius: 32px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); border: 1px solid #e1e1e1;">
                 
                 <tr>
                   <td style="background-color: #E60023; padding: 35px 40px; text-align: left;">
@@ -68,6 +69,13 @@ export async function POST(request: Request) {
                         <td style="padding: 14px 0; border-bottom: 1px solid #ededed; font-size: 14px; font-weight: 700; color: #767676; text-transform: uppercase; letter-spacing: 0.5px;">Email</td>
                         <td style="padding: 14px 0; border-bottom: 1px solid #ededed; font-size: 16px; font-weight: 600; color: #E60023;">
                           <a href="mailto:${email}" style="color: #E60023; text-decoration: none;">${email}</a>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td style="padding: 14px 0; border-bottom: 1px solid #ededed; font-size: 14px; font-weight: 700; color: #767676; text-transform: uppercase; letter-spacing: 0.5px;">Phone</td>
+                        <td style="padding: 14px 0; border-bottom: 1px solid #ededed; font-size: 16px; font-weight: 600; color: #111111;">
+                          ${phone ? `<a href="tel:${phone}" style="color: #111111; text-decoration: none;">${phone}</a>` : '<span style="color: #b5b5b5; font-style: italic; font-weight: 400;">Not Provided</span>'}
                         </td>
                       </tr>
                       

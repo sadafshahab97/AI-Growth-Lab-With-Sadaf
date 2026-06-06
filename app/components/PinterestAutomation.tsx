@@ -14,7 +14,7 @@ const ProofSection = dynamic(() => import("./ProofSection"), {
   loading: () => <div className="h=-100 bg-black" />, // Loading state
 });
 
-export default function LandingPage() {
+export default function PinterestAutomation() {
   return (
     <div className="min-h-screen bg-cinematic-black text-white relative  overflow-x-hidden">
       {/* Background Grid Overlay */}

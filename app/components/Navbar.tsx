@@ -8,6 +8,7 @@ import {
   Send,
   Loader2,
   CheckCircle,
+  RefreshCw,
 } from "lucide-react";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
@@ -47,14 +48,24 @@ const Navbar = () => {
       description:
         "High-performance, custom web applications tailored to your business.",
       href: "/website-building",
-      icon: <Laptop className="w-5 h-5 text-action" />,
+      target: "_self",
+      icon: <Laptop className="w-5 h-5 text-white" />,
+    },
+    {
+      name: "SyncVantage Automation Engine",
+      description:
+        "Autonomous inbound lead management and real-time cross-platform data synchronization pipelines.",
+      href: "https://syncvantage-business-lead-automatio.vercel.app/",
+      target: "_blank",
+      icon: <RefreshCw className="w-5 h-5 text-white" />,
     },
     {
       name: "Pinterest Automation",
       description:
         "AI-powered post scheduling, SEO optimization, and workflow automation.",
-      href: "/",
-      icon: <Pin className="w-5 h-5 text-action" />,
+      href: "/pinterest-automation",
+      target: "_self",
+      icon: <Pin className="w-5 h-5 text-white" />,
     },
   ];
 
@@ -118,7 +129,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-16 h-16 bg-[#121212] border border-white/10 rounded-full flex items-center justify-center overflow-hidden group-hover:border-action transition-all duration-300 relative">
+              <div className="w-16 h-16 bg-[#121212] border border-white/10 rounded-full flex items-center justify-center overflow-hidden group-hover:border-white transition-all duration-300 relative">
                 <Image
                   src="/ai_growth_lab_logo.png"
                   alt="AI Growth Lab Logo"
@@ -132,12 +143,24 @@ const Navbar = () => {
               </div>
 
               <span className="font-bold text-xl tracking-tight text-white uppercase group-hover:text-slate-200 transition-colors">
-                AI Growth <span className="text-action">Lab</span>
+                AI Growth <span className="text-white">Lab</span>
               </span>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              {/* Home Link */}
+              <Link
+                href="/"
+                className={`text-[11px] font-black uppercase tracking-[0.2em] transition-colors ${
+                  pathname === "/"
+                    ? "text-white"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                Home
+              </Link>
+
               {/* Services Dropdown */}
               <div
                 className="relative p-2 cursor-pointer group"
@@ -147,7 +170,7 @@ const Navbar = () => {
                 <button className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] hover:text-white transition-colors flex items-center gap-1">
                   Services
                   <ChevronDown
-                    className={`w-3 h-3 transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-180 text-action" : ""}`}
+                    className={`w-3 h-3 transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-180 text-white" : ""}`}
                   />
                 </button>
 
@@ -165,13 +188,14 @@ const Navbar = () => {
                           <Link
                             key={service.name}
                             href={service.href}
+                            target={service.target}
                             className="flex items-start gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-200 group/item"
                           >
-                            <div className="p-2 bg-[#1a1a1a] rounded-lg border border-white/5 group-hover/item:border-action/30 group-hover/item:bg-action/10 transition-colors">
+                            <div className="p-2 bg-[#1a1a1a] rounded-lg border border-white/5 group-hover/item:border-white/30 group-hover/item:bg-white/10 transition-colors">
                               {service.icon}
                             </div>
                             <div>
-                              <h4 className="text-sm font-bold text-white group-hover/item:text-action transition-colors">
+                              <h4 className="text-sm font-bold text-white group-hover/item:text-white transition-colors">
                                 {service.name}
                               </h4>
                               <p className="text-xs text-slate-500 mt-1 line-clamp-2 font-medium">
@@ -189,9 +213,9 @@ const Navbar = () => {
               {/* Get Proposal Button Desktop */}
               <button
                 onClick={() => setIsProposalOpen(true)}
-                className="bg-action hover:bg-action-hover text-white px-6 py-3 rounded-xl text-xs font-black shadow-lg shadow-red-500/20 transition-all uppercase tracking-widest cursor-pointer"
+                className="bg-white hover:bg-slate-200 text-black px-6 py-3 rounded-xl text-xs font-black shadow-lg shadow-black/20 transition-all uppercase tracking-widest cursor-pointer"
               >
-                Get Free Proposal
+                Get Quote
               </button>
             </div>
 
@@ -218,13 +242,26 @@ const Navbar = () => {
               className="absolute top-20 left-0 w-full bg-[#1a1a1a] border-b border-white/10 px-6 py-8 flex flex-col gap-5 shadow-2xl md:hidden z-50 overflow-y-auto max-h-[calc(100vh-5rem)]"
             >
               <div className="space-y-2">
+                {/* Mobile Home Link */}
+                <Link
+                  href="/"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block text-sm font-bold uppercase tracking-widest py-2 transition-colors ${
+                    pathname === "/"
+                      ? "text-white"
+                      : "text-slate-300 hover:text-white"
+                  }`}
+                >
+                  Home
+                </Link>
+
                 <button
                   onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                   className="w-full flex items-center justify-between text-sm font-bold text-slate-300 uppercase tracking-widest hover:text-white py-2"
                 >
                   Services
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180 text-action" : ""}`}
+                    className={`w-4 h-4 transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180 text-white" : ""}`}
                   />
                 </button>
 
@@ -240,6 +277,7 @@ const Navbar = () => {
                         <Link
                           key={service.name}
                           href={service.href}
+                          target={service.target}
                           onClick={() => {
                             setIsMobileMenuOpen(false);
                             setIsMobileServicesOpen(false);
@@ -261,9 +299,9 @@ const Navbar = () => {
                   setIsMobileMenuOpen(false);
                   setIsProposalOpen(true);
                 }}
-                className="bg-action text-white py-4 rounded-xl text-center text-xs font-black uppercase tracking-widest mt-2 cursor-pointer"
+                className="bg-white text-black py-4 rounded-xl text-center text-xs font-black uppercase tracking-widest mt-2 cursor-pointer hover:bg-slate-200 transition-colors"
               >
-                Get Free Proposal
+                Get Quote
               </button>
             </motion.div>
           )}
@@ -300,7 +338,7 @@ const Navbar = () => {
 
               {submitSuccess ? (
                 <div className="text-center py-12 flex flex-col items-center justify-center">
-                  <CheckCircle className="w-16 h-16 text-action animate-bounce mb-4" />
+                  <CheckCircle className="w-16 h-16 text-white animate-bounce mb-4" />
                   <h3 className="text-xl font-bold">
                     Proposal Request Dispatched!
                   </h3>
@@ -312,7 +350,7 @@ const Navbar = () => {
               ) : (
                 <form onSubmit={handleProposalSubmit}>
                   <div className="mb-6">
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-action">
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400">
                       Growth Request Pipeline
                     </span>
                     <h3 className="text-xl font-bold mt-1">
@@ -337,7 +375,7 @@ const Navbar = () => {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your name"
-                          className="w-full bg-white/3 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-action/50 transition-colors"
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/50 transition-colors"
                         />
                       </div>
                       <div>
@@ -346,7 +384,7 @@ const Navbar = () => {
                             Email Address *
                           </label>
                           {emailError && (
-                            <span className="text-[10px] text-red-500">
+                            <span className="text-[10px] text-white font-semibold">
                               Invalid Email
                             </span>
                           )}
@@ -361,10 +399,10 @@ const Navbar = () => {
                             if (emailError) setEmailError(false);
                           }}
                           placeholder="name@company.com"
-                          className={`w-full bg-white/3 border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none transition-colors ${
+                          className={`w-full bg-white/5 border rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none transition-colors ${
                             emailError
-                              ? "border-red-500"
-                              : "border-white/10 focus:border-action/50"
+                              ? "border-white"
+                              : "border-white/10 focus:border-white/50"
                           }`}
                         />
                       </div>
@@ -380,7 +418,7 @@ const Navbar = () => {
                         value={businessName}
                         onChange={(e) => setBusinessName(e.target.value)}
                         placeholder="e.g. Luxury On Budget"
-                        className="w-full bg-white/3 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-action/50 transition-colors"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/50 transition-colors"
                       />
                     </div>
 
@@ -395,7 +433,7 @@ const Navbar = () => {
                         value={requirement}
                         onChange={(e) => setRequirement(e.target.value)}
                         placeholder="Tell us about your brand, target metrics, or automation scale objectives..."
-                        className="w-full bg-white/3 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-action/50 transition-colors resize-none"
+                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/50 transition-colors resize-none"
                       />
                     </div>
                   </div>
@@ -403,7 +441,7 @@ const Navbar = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-action hover:bg-action-hover text-white py-3.5 rounded-xl text-center uppercase tracking-wider text-xs font-bold transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                    className="w-full bg-white hover:bg-slate-200 text-black py-3.5 rounded-xl text-center uppercase tracking-wider text-xs font-bold transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <>

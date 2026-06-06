@@ -1,31 +1,33 @@
 import { Metadata } from "next";
-import LandingPage from "./components/LandingPage";
+import AIGrowthLab from "./components/AIGrowthLab";
 
 export const metadata: Metadata = {
-  title: "Sadaf Automation | AI-Powered Pinterest Growth Engine",
+  title: "AI Growth Lab | Next-Gen Digital Infrastructure & Automation",
   description:
-    "Scale your e-commerce sales with agentic workflows. We use V-2 Engine technology for human-mimicking Pinterest automation and SEO optimization.",
+    "We build high-performance web systems, autonomous inbound lead pipelines, and AI-driven growth engines to scale your enterprise workflows.",
   keywords: [
+    "AI Growth Lab",
+    "Digital Infrastructure",
+    "SyncVantage Automation Engine",
+    "Full-Stack Web Solutions",
     "Pinterest Automation",
-    "AI Marketing",
-    "E-commerce Growth",
-    "Sadaf Developer",
-    "Pinterest SEO",
-    "Agentic Workflows",
+    "B2B Lead Pipelines",
+    "Autonomous Workflows",
+    "Data Synchronization",
   ],
-  authors: [{ name: "Sadaf Developer" }],
+  authors: [{ name: "AI Growth Lab Engineering" }],
   openGraph: {
-    title: "Sadaf Automation | High-Conversion Pinterest AI",
+    title: "AI Growth Lab | Autonomous Digital Infrastructure",
     description:
-      "Automate your Pinterest growth with our V-2 Analytical Engine. +999% reach in 6 weeks.",
-    url: "https://sadaf-pin-ai-automation.vercel.app", 
-    siteName: "Sadaf Automation",
+      "Scale your workflows with high-performance web solutions, real-time data sync, and AI-driven automation pipelines.",
+    url: "https://ai-growth-lab-with-sadaf.vercel.app/",
+    siteName: "AI Growth Lab",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.jpg", 
         width: 1200,
         height: 630,
-        alt: "Sadaf Automation Dashboard",
+        alt: "AI Growth Lab Infrastructure Dashboard",
       },
     ],
     locale: "en_US",
@@ -33,8 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sadaf Automation | Pinterest V-2 Engine",
-    description: "AI-driven Pinterest automation for US-based brands.",
+    title: "AI Growth Lab | Next-Gen Automation Engines",
+    description:
+      "Autonomous data routing, custom web solutions, and AI-driven scale engines.",
     images: ["/og-image.jpg"],
   },
   robots: {
@@ -44,7 +47,7 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-  return <LandingPage />;
+  return <AIGrowthLab />;
 };
 
 export default page;

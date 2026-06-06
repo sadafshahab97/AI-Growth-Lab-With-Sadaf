@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, ArrowRight } from "lucide-react";
-import { BsFacebook, BsInstagram, BsLinkedin } from "react-icons/bs";
+import { BsTwitter, BsLinkedin } from "react-icons/bs";
+import { PiPinterestLogo } from "react-icons/pi";
 
 const Footer = () => {
   return (
@@ -67,20 +68,20 @@ const Footer = () => {
                 <BsLinkedin className="w-4 h-4" />
               </Link>
               <Link
-                href="https://www.facebook.com/automatewithsadaf/"
+                href="https://www.pinterest.com/sadafshahab97"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[#1a1a1a] border border-white/5 rounded-full flex items-center justify-center hover:text-white hover:bg-action hover:border-transparent transition-all hover:scale-110"
               >
-                <BsFacebook className="w-4 h-4" />
+                <PiPinterestLogo className="w-4 h-4" />
               </Link>
               <Link
-                href="https://www.instagram.com/automatewithsadaf"
+                href="https://www.twitter.com/sadafshahab97"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[#1a1a1a] border border-white/5 rounded-full flex items-center justify-center hover:text-white hover:bg-action hover:border-transparent transition-all hover:scale-110"
               >
-                <BsInstagram className="w-4 h-4" />
+                <BsTwitter className="w-4 h-4" />
               </Link>
             </div>
           </div>
@@ -91,6 +92,16 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-4 text-sm text-slate-400 font-medium">
+              <li>
+                <Link
+                  href="https://syncvantage-business-lead-automatio.vercel.app/"
+                  target=""
+                  className="hover:text-action transition-colors flex items-center gap-2 group"
+                >
+                  <ArrowRight className="w-3 h-3 text-action group-hover:translate-x-1 transition-transform" />
+                 Sync Vantage Business Lead Automation
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/website-building"

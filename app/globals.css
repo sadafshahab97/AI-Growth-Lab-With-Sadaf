@@ -63,3 +63,35 @@ body {
   min-width: 0 !important;
   min-height: 0 !important;
 }
+@keyframes horizontal-swing {
+  0% {
+    transform: translateX(5%);
+  }
+  50% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(20%);
+  }
+}
+
+.animate-swing {
+  animation: horizontal-swing 5s ease-in-out infinite;
+}
+
+.mask-edges {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    white 15%,
+    white 85%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    white 15%,
+    white 85%,
+    transparent
+  );
+}
