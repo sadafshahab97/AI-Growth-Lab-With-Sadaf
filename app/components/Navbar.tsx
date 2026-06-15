@@ -55,7 +55,7 @@ const Navbar = () => {
       name: "SyncVantage Automation Engine",
       description:
         "Autonomous inbound lead management and real-time cross-platform data synchronization pipelines.",
-      href: "https://syncvantage-business-lead-automatio.vercel.app/",
+      href: "https://syncvantage-business-lead-automation.vercel.app/",
       target: "_blank",
       icon: <RefreshCw className="w-5 h-5 text-white" />,
     },
